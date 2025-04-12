@@ -32,14 +32,22 @@ def sphere_area(diameter, material = "유리", thickness = 1):
 def main():
     global diameter, material, area, weight, thickness
     while True:
-        try:
-            diameter = float(input("지름(미터 단위, 0 입력 시 종료): "))
-            if diameter == 0.0: 
-                return
-        except ValueError:
-            print("숫자를 입력해주세요\n")
-            continue
+        diameter_input = input("지름(미터 단위, 0 입력 시 종료, 기본값: 10): ").strip()
 
+        # 입력이 없을 경우 기본값 사용
+        if diameter_input == "":
+            print("입력이 없어 기본값 10m 사용.")
+            diameter = 10
+
+        else:
+            try:
+                diameter = float(diameter_input)
+                if diameter == 0.0:
+                    return
+            except ValueError:
+                print("잘못된 입력입니다. 기본값 10m를 사용합니다.")
+                diameter = 10
+                
         material = input("재질(유리/알루미늄/탄소강, 기본값: 유리): ")
         if material.strip() == "":
             material = "유리"
